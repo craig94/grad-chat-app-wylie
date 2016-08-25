@@ -1,12 +1,20 @@
 var express = require("express");
 var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser")
 
 module.exports = function(port, db, githubAuthoriser) {
     var app = express();
 
-    app.use(express.static("public"));
-    app.use(cookieParser());
+    console.log("dirname:\t" + __dirname);
 
+    //app.use(express.static("public"));
+    app.use("/lib", express.static(__dirname + "/../node_modules"));
+    app.use("/templates", express.static(__dirname + "/../public/templates"));
+    app.use("/", express.static(__dirname + "/../public"));
+
+    app.use(bodyParser.json());
+    app.use(cookieParser());
+//sdasdda
     var users = db.collection("users");
     var sessions = {};
 
