@@ -4,6 +4,7 @@ var MongoClient = require("mongodb").MongoClient;
 
 var port = process.env.PORT || 8080;
 var dbUri = process.env.DB_URI || "mongodb://test:test@ds027491.mongolab.com:27491/chat-grad-project";
+//var dbUri = "mongodb://cwylie:testgradpass1@ds015636.mlab.com:15636/grad-chat-app-wylie";
 var oauthClientId = process.env.OAUTH_CLIENT_ID || "fa4a22095c46dfc1d832";
 var oauthSecret = process.env.OAUTH_SECRET || "4bbf1b48173c3cbc35917fad9f94ef2b584cbaa4";
 
