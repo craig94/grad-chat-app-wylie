@@ -36,6 +36,9 @@ var AppComponent = (function () {
         var _this = this;
         this.service.getUsers().then(function (result) { return _this.users = result; });
     };
+    AppComponent.prototype.selectUser = function (user) {
+        this.selectedUser = user;
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: "my-app",

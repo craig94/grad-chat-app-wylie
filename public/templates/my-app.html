@@ -3,9 +3,12 @@
     <section *ngIf="loggedIn">
         <p >Logged in as {{user._id}}.</p>
         <h2>List of registered users</h2>
-        <ul>
-            <li *ngFor="let user of users">
-                {{user.id}}
+        <ul class="users">
+            <li *ngFor="let user of users" [class.selected]="user === selectedUser" (click)="selectUser(user)">
+                <span class="badge">
+                    {{user.id}}
+                </span>
+                {{user.name}}
             </li>
         </ul>
     </section>

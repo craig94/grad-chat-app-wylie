@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
     users: User[];
     loginUri: string;
     loggedIn: boolean;
+    selectedUser: User;
 
     constructor (private service: UserService) {}
 
@@ -44,5 +45,9 @@ export class AppComponent implements OnInit {
         this.service.getUsers().then(
             result => this.users = result
         );
+    }
+
+    selectUser(user: User): void {
+        this.selectedUser = user;
     }
 }
