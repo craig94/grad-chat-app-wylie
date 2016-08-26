@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("../components/app.component");
+var selectedUser_component_1 = require("../components/selectedUser.component");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var user_service_1 = require("../services/user.service");
@@ -20,7 +21,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             bootstrap: [app_component_1.AppComponent],
-            declarations: [app_component_1.AppComponent],
+            declarations: [app_component_1.AppComponent, selectedUser_component_1.SelectedUser],
             providers: [user_service_1.UserService],
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
         }), 
