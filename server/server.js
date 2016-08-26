@@ -27,7 +27,7 @@ module.exports = function(port, db, githubAuthoriser) {
                     if (!user) {
                         // TODO: Wait for this operation to complete
                         users.insertOne({
-                            _id: githubUser.login,
+                            id: githubUser.login,
                             name: githubUser.name,
                             avatarUrl: githubUser.avatar_url
                         });
@@ -66,6 +66,19 @@ module.exports = function(port, db, githubAuthoriser) {
         }
     });
 
+
+    app.get("/api/user/:id", function(req, res) {
+        users.findOne({
+            _id: req.params.id
+        }, function(err, user) {
+            if (!err) {
+                res.json(user);
+            } else {
+                res.sendStatus(500);
+            }
+        });
+    });
+
     app.get("/api/user", function(req, res) {
         users.findOne({
             _id: req.session.user
@@ -83,7 +96,7 @@ module.exports = function(port, db, githubAuthoriser) {
             if (!err) {
                 res.json(docs.map(function(user) {
                     return {
-                        id: user._id,
+                        _id: user._id,
                         name: user.name,
                         avatarUrl: user.avatarUrl
                     };

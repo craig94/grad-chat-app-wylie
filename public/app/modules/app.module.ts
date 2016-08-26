@@ -7,10 +7,11 @@ import { HttpModule, JsonpModule } from "@angular/http";
 import { UserService } from "../services/user.service";
 import { routing } from "../router/app.routing";
 import { userDashboard } from "../components/userDashboard.component";
+import { ChatComponent } from "../components/chat/chat.component";
 
 @NgModule({
   bootstrap:    [ AppComponent ],
-  declarations: [ AppComponent, SelectedUser, userDashboard ],
+  declarations: [ AppComponent, SelectedUser, userDashboard, ChatComponent ],
   providers: [ UserService ],
   imports:      [ BrowserModule, FormsModule, HttpModule, JsonpModule, routing ],
 })

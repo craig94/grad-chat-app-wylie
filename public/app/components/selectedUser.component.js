@@ -10,9 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var user_1 = require("../objects/user");
+var router_1 = require("@angular/router");
 var SelectedUser = (function () {
-    function SelectedUser() {
+    function SelectedUser(router) {
+        this.router = router;
     }
+    SelectedUser.prototype.chat = function () {
+        var link = ["/users", this.user._id];
+        this.router.navigate(link);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', user_1.User)
@@ -22,7 +28,7 @@ var SelectedUser = (function () {
             selector: "user-detail",
             templateUrl: "templates/user-detail.html",
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], SelectedUser);
     return SelectedUser;
 }());

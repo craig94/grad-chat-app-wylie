@@ -35,6 +35,13 @@ var UserService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    UserService.prototype.getOtherUser = function (id) {
+        var userUrl = this.url + "/" + id;
+        return this.http.get(userUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     UserService.prototype.handleError = function (error) {
         return Promise.reject(error.message || error);
     };

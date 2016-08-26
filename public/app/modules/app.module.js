@@ -17,13 +17,14 @@ var http_1 = require("@angular/http");
 var user_service_1 = require("../services/user.service");
 var app_routing_1 = require("../router/app.routing");
 var userDashboard_component_1 = require("../components/userDashboard.component");
+var chat_component_1 = require("../components/chat/chat.component");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             bootstrap: [app_component_1.AppComponent],
-            declarations: [app_component_1.AppComponent, selectedUser_component_1.SelectedUser, userDashboard_component_1.userDashboard],
+            declarations: [app_component_1.AppComponent, selectedUser_component_1.SelectedUser, userDashboard_component_1.userDashboard, chat_component_1.ChatComponent],
             providers: [user_service_1.UserService],
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule, app_routing_1.routing],
         }), 

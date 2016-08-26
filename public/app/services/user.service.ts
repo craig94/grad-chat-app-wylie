@@ -31,6 +31,15 @@ export class UserService {
         .catch(this.handleError);
     }
 
+    getOtherUser(id: string): Promise<User> {
+        let userUrl = this.url + "/" + id;
+
+        return this.http.get(userUrl)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+    }
+
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);
     }
