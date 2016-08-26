@@ -1,6 +1,8 @@
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser")
+var mongodb = require("mongodb");
+var MongoClient = mongodb.MongoClient;
 
 module.exports = function(port, db, githubAuthoriser) {
     var app = express();
@@ -17,6 +19,10 @@ module.exports = function(port, db, githubAuthoriser) {
 
     var users = db.collection("users");
     var sessions = {};
+
+    // my database stuff
+    var uri = "mongodb://cwylie:testgradpass1@ds015636.mlab.com:15636/grad-chat-app-wylie";
+    var myDB = mongodb.connect(uri, "users");
 
     app.get("/oauth", function(req, res) {
         githubAuthoriser.authorise(req, function(githubUser, token) {
