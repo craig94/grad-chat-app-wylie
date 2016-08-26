@@ -32,7 +32,6 @@ var ChatComponent = (function () {
         var _this = this;
         this.service.getOtherUser(id).then(function (result) {
             _this.otherUser = result;
-            console.log("OTHER USER:\t" + _this.otherUser._id);
         });
     };
     ChatComponent = __decorate([

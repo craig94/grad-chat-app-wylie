@@ -33,7 +33,6 @@ export class ChatComponent implements OnInit {
         this.service.getOtherUser(id).then(
             result => {
                 this.otherUser = result;
-                console.log("OTHER USER:\t" + this.otherUser._id);
             }
         );
     }
