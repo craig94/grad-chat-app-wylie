@@ -1,9 +1,9 @@
 import { NgModule }      from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { AppComponent }  from "./app.component";
+import { AppComponent }  from "../components/app.component";
 import { FormsModule } from "@angular/forms";
 import { HttpModule, JsonpModule } from "@angular/http";
-import { UserService } from "./user.service";
+import { UserService } from "../services/user.service";
 
 @NgModule({
   bootstrap:    [ AppComponent ],

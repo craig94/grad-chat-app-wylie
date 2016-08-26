@@ -14,7 +14,7 @@ module.exports = function(port, db, githubAuthoriser) {
 
     app.use(bodyParser.json());
     app.use(cookieParser());
-//sdasdda
+
     var users = db.collection("users");
     var sessions = {};
 
