@@ -1,6 +1,6 @@
 "use strict";
 var router_1 = require('@angular/router');
-var userDashboard_component_1 = require('../components/userDashboard.component');
+var userDashboard_component_1 = require('../components/userDashboard/userDashboard.component');
 var chat_component_1 = require('../components/chat/chat.component');
 var appRoutes = [
     {

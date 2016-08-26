@@ -11,12 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("../components/app.component");
-var selectedUser_component_1 = require("../components/selectedUser.component");
+var selectedUser_component_1 = require("../components/userDashboard/selectedUser.component");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var user_service_1 = require("../services/user.service");
 var app_routing_1 = require("../router/app.routing");
-var userDashboard_component_1 = require("../components/userDashboard.component");
+var userDashboard_component_1 = require("../components/userDashboard/userDashboard.component");
 var chat_component_1 = require("../components/chat/chat.component");
 var AppModule = (function () {
     function AppModule() {

@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { userDashboard }      from '../components/userDashboard.component';
+import { userDashboard }      from '../components/userDashboard/userDashboard.component';
 import { ChatComponent }      from '../components/chat/chat.component';
 
 const appRoutes: Routes = [

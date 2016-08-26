@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { User } from "../objects/user";
+import { User } from "../../objects/user";
 import { Router } from "@angular/router";
 
 @Component({
