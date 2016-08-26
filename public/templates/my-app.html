@@ -1,0 +1,12 @@
+<body>
+    <a *ngIf="!loggedIn" href="{{loginUri}}">Log in</a>
+    <section *ngIf="loggedIn">
+        <p >Logged in as {{user._id}}.</p>
+        <h2>List of registered users</h2>
+        <ul>
+            <li *ngFor="let user of users">
+                {{user.id}}
+            </li>
+        </ul>
+    </section>
+</body>
