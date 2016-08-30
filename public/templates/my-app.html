@@ -1,6 +1,6 @@
 <a *ngIf="!loggedIn" href="{{loginUri}}">Log in</a>
-<section *ngIf="loggedIn">
-    <section>
+<div *ngIf="loggedIn">
+    <div id="mainSection">
         <p>Logged in as {{user._id}}.</p>
         <h2>List of registered users</h2>
         <ul class="users">
@@ -12,6 +12,6 @@
             </li>
         </ul>
         <user-detail [user]="user" [selectedUser]="selectedUser"></user-detail>
-    </section>
+    </div>
     <user-chats [user]="user"></user-chats>
-</section>
+</div>
