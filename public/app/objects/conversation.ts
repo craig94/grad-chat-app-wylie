@@ -1,7 +1,8 @@
 import { User } from "./user";
+import { Message } from "./message";
 
 export class Conversation {
-    messages: {};
+    messages: Message[];
     user1: User;
     user2: User;
 }

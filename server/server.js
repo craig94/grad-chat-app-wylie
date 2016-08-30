@@ -119,7 +119,7 @@ module.exports = function(port, db, githubAuthoriser) {
         var newChat = {
             "user1": user,
             "user2": selectedUser,
-            "messages": {}
+            "messages": []
         };
 
         convos[chatID] = newChat;
