@@ -13,9 +13,6 @@ require('rxjs/add/operator/toPromise');
 var ChatService = (function () {
     function ChatService() {
     }
-    ChatService.prototype.setChats = function (chats) {
-        this.chats = chats;
-    };
     ChatService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

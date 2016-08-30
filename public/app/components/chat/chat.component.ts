@@ -3,6 +3,7 @@ import { User } from "../../objects/user";
 import { Observable } from "rxjs/Rx";
 import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Params } from '@angular/router';
+import { Conversation } from "../../objects/conversation";
 
 @Component({
     selector: "user-chat",
@@ -11,16 +12,17 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class ChatComponent implements OnInit {
 
     user: User;
-    otherUser: User;
+    chatID: string;
+    convo: Conversation;
 
     constructor(private service: UserService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.getUser();
         this.route.params.forEach((params: Params) => {
-            let id = params["id"];
-            this.getOtherUser(id);
+            this.chatID = params["chatID"];
         });
+        this.getChatDetails(this.chatID);
     }
 
     getUser(): void {
@@ -29,11 +31,9 @@ export class ChatComponent implements OnInit {
         );
     }
 
-    getOtherUser(id: string): void {
-        this.service.getOtherUser(id).then(
-            result => {
-                this.otherUser = result;
-            }
+    getChatDetails(id: string): void {
+        this.service.getChatDetails(id).then(
+            result => this.convo = result
         );
     }
 }

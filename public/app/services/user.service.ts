@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../objects/user';
 import { Chat } from '../objects/chat';
+import { Conversation } from '../objects/conversation';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { ChatService } from './chat.service';
@@ -59,6 +60,15 @@ export class UserService {
         return this.http.post(chatsUrl, body, {headers: headers})
         .toPromise()
         .then(response => response)
+        .catch(this.handleError);
+    }
+
+    getChatDetails(chatID: string): Promise<Conversation> {
+        let chatUrl = "/api/chat/" + chatID;
+
+        return this.http.get(chatUrl)
+        .toPromise()
+        .then(response => response.json())
         .catch(this.handleError);
     }
 

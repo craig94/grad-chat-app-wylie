@@ -8,8 +8,4 @@ import 'rxjs/add/operator/toPromise';
 export class ChatService {
 
     chats: Chat[];
-
-    setChats(chats: Chat[]): void {
-        this.chats = chats;
-    }
 }

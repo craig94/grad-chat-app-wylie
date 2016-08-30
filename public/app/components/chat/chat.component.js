@@ -20,19 +20,17 @@ var ChatComponent = (function () {
         var _this = this;
         this.getUser();
         this.route.params.forEach(function (params) {
-            var id = params["id"];
-            _this.getOtherUser(id);
+            _this.chatID = params["chatID"];
         });
+        this.getChatDetails(this.chatID);
     };
     ChatComponent.prototype.getUser = function () {
         var _this = this;
         this.service.getUser().then(function (result) { return _this.user = result; });
     };
-    ChatComponent.prototype.getOtherUser = function (id) {
+    ChatComponent.prototype.getChatDetails = function (id) {
         var _this = this;
-        this.service.getOtherUser(id).then(function (result) {
-            _this.otherUser = result;
-        });
+        this.service.getChatDetails(id).then(function (result) { return _this.convo = result; });
     };
     ChatComponent = __decorate([
         core_1.Component({

@@ -10,19 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var user_1 = require("../../objects/user");
-var router_1 = require("@angular/router");
 var user_service_1 = require("../../services/user.service");
 var chat_service_1 = require("../../services/chat.service");
 var SelectedUser = (function () {
-    function SelectedUser(router, service, chatService) {
-        this.router = router;
+    function SelectedUser(service, chatService) {
         this.service = service;
         this.chatService = chatService;
     }
-    SelectedUser.prototype.chat = function () {
-        var link = ["/users", this.user._id];
-        this.router.navigate(link);
-    };
     SelectedUser.prototype.createChat = function () {
         var _this = this;
         this.service.createChat(this.user, this.selectedUser).then(function (result) {
@@ -44,7 +38,7 @@ var SelectedUser = (function () {
             selector: "user-detail",
             templateUrl: "templates/user-detail.html",
         }), 
-        __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService, chat_service_1.ChatService])
+        __metadata('design:paramtypes', [user_service_1.UserService, chat_service_1.ChatService])
     ], SelectedUser);
     return SelectedUser;
 }());

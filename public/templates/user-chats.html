@@ -5,4 +5,9 @@
             {{chat.userID}}
         </li>
     </ul>
+    <div *ngIf="selectedChat">
+        <button class="button" (click)="chat()">
+            View Chat
+        </button>
+    </div>
 </div>

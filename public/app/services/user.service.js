@@ -60,6 +60,13 @@ var UserService = (function () {
             .then(function (response) { return response; })
             .catch(this.handleError);
     };
+    UserService.prototype.getChatDetails = function (chatID) {
+        var chatUrl = "/api/chat/" + chatID;
+        return this.http.get(chatUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     UserService.prototype.handleError = function (error) {
         return Promise.reject(error.message || error);
     };

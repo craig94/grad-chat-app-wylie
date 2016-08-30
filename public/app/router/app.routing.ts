@@ -13,7 +13,7 @@ const appRoutes: Routes = [
         component: userDashboard
     },
     {
-        path: 'users/:id',
+        path: 'chat/:chatID',
         component: ChatComponent
     },
 ];

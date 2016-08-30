@@ -1,6 +1,5 @@
 import { Component, Input } from "@angular/core";
 import { User } from "../../objects/user";
-import { Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
 import { ChatService } from "../../services/chat.service";
 
@@ -14,12 +13,7 @@ export class SelectedUser {
     @Input()
     selectedUser: User;
 
-    constructor(private router: Router, private service: UserService, private chatService: ChatService) {}
-
-    chat(): void {
-        let link = ["/users", this.user._id];
-        this.router.navigate(link);
-    }
+    constructor(private service: UserService, private chatService: ChatService) {}
 
     createChat(): void {
         this.service.createChat(this.user, this.selectedUser).then(

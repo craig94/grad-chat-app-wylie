@@ -3,7 +3,7 @@ import { User } from "../../objects/user";
 import { Chat } from "../../objects/chat";
 import { Observable } from "rxjs/Rx";
 import { UserService } from "../../services/user.service";
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserChats implements OnInit {
     @Input()
     user: User;
 
-    constructor(private service: UserService, private route: ActivatedRoute, private chatService: ChatService) {}
+    constructor(private service: UserService, private router: Router, private chatService: ChatService) {}
 
     ngOnInit(): void {
         this.getChats();
@@ -34,5 +34,10 @@ export class UserChats implements OnInit {
 
     selectChat(chat: Chat): void {
         this.selectedChat = chat;
+    }
+
+    chat(): void {
+        let link = ["/chat/", this.selectedChat.chatID];
+        this.router.navigate(link);
     }
 }

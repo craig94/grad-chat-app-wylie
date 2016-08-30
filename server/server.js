@@ -126,6 +126,12 @@ module.exports = function(port, db, githubAuthoriser) {
         res.sendStatus(201);
     });
 
+    app.get("/api/chat/:chatID", function(req, res) {
+        var chatID = req.params.chatID;
+        var chatDetails = convos[chatID];
+        res.json(chatDetails);
+    });
+
     app.get("/api/getchats/:id", function(req, res) {
         var userID = req.params.id;
         /*convos.toArray(function(err,docs) {
@@ -161,7 +167,6 @@ module.exports = function(port, db, githubAuthoriser) {
                 });
             }
         }
-        console.log(results);
         res.json(results);
     });
 
