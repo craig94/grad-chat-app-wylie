@@ -1,6 +1,7 @@
 var express = require("express");
 var cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser")
+var bodyParser = require("body-parser");
+var uuid = require('uuid');
 
 module.exports = function(port, db, githubAuthoriser) {
     var app = express();
@@ -16,7 +17,10 @@ module.exports = function(port, db, githubAuthoriser) {
     app.use(cookieParser());
 
     var users = db.collection("users");
+    var chats = db.collection("chats");
     var sessions = {};
+
+    var convos = {};
 
     app.get("/oauth", function(req, res) {
         githubAuthoriser.authorise(req, function(githubUser, token) {
@@ -105,6 +109,59 @@ module.exports = function(port, db, githubAuthoriser) {
                 res.sendStatus(500);
             }
         });
+    });
+
+    app.post("/api/newchat", function(req, res) {
+        var user = req.body.user;
+        var selectedUser = req.body.selectedUser;
+        var chatID = uuid.v1();
+
+        var newChat = {
+            "user1": user,
+            "user2": selectedUser,
+            "messages": {}
+        };
+
+        convos[chatID] = newChat;
+        res.sendStatus(201);
+    });
+
+    app.get("/api/getchats/:id", function(req, res) {
+        var userID = req.params.id;
+        /*convos.toArray(function(err,docs) {
+            if (!err) {
+                res.json(docs.map(function(chat) {
+                    if (chat.user1._id === userID) {
+                        return {
+                            user: chat.user2._id,
+                            chatID: chat
+                        };
+                    } else if (chat.user2._id === userID) {
+                        return {
+                            user: chat.user1._id,
+                            chatID: chat
+                        };
+                    }
+                }));
+            } else {
+                res.sendStatus(500);
+            }
+        });*/
+        results = [];
+        for (var chat in convos) {
+            if (convos[chat]["user1"]["_id"] === userID) {
+                results.push({
+                    userID: convos[chat]["user2"]["_id"],
+                    chatID: chat
+                });
+            } else if (convos[chat]["user2"]["_id"] === userID) {
+                results.push({
+                    userID: convos[chat]["user1"]["_id"],
+                    chatID: chat
+                });
+            }
+        }
+        res.json(results);
     });
 
     return app.listen(port);

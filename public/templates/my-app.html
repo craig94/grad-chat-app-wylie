@@ -1,14 +1,17 @@
 <a *ngIf="!loggedIn" href="{{loginUri}}">Log in</a>
 <section *ngIf="loggedIn">
-    <p >Logged in as {{user._id}}.</p>
-    <h2>List of registered users</h2>
-    <ul class="users">
-        <li *ngFor="let user of users" [class.selected]="user === selectedUser" (click)="selectUser(user)">
-            <span class="badge">
-                {{user._id}}
-            </span>
-            {{user.name}}
-        </li>
-    </ul>
-    <user-detail [user]="selectedUser"></user-detail>
+    <section>
+        <p>Logged in as {{user._id}}.</p>
+        <h2>List of registered users</h2>
+        <ul class="users">
+            <li *ngFor="let user of users" [class.selected]="user === selectedUser" (click)="selectUser(user)">
+                <span class="badge">
+                    {{user._id}}
+                </span>
+                {{user.name}}
+            </li>
+        </ul>
+        <user-detail [user]="user" [selectedUser]="selectedUser"></user-detail>
+    </section>
+    <user-chats [user]="user"></user-chats>
 </section>

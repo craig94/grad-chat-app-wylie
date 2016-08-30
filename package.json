@@ -37,7 +37,8 @@
     "istanbul": "^0.3.17",
     "mocha": "^2.2.5",
     "mongodb": "^2.2.8",
-    "mongojs": "^2.4.0"
+    "mongojs": "^2.4.0",
+    "uuid": "^2.0.2"
   },
   "dependencies": {
     "URIjs": "^1.15.1",

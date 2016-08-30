@@ -42,6 +42,22 @@ var UserService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    UserService.prototype.getChats = function (userID) {
+        var chatsUrl = "/api/getchats/" + userID;
+        return this.http.get(chatsUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    UserService.prototype.createChat = function (user, selectedUser) {
+        var chatsUrl = "/api/newchat";
+        var body = JSON.stringify({ "user": user, "selectedUser": selectedUser });
+        var headers = new http_1.Headers({ "Content-Type": "application/json" });
+        return this.http.post(chatsUrl, body, { headers: headers })
+            .toPromise()
+            .then(function (response) { return response; })
+            .catch(this.handleError);
+    };
     UserService.prototype.handleError = function (error) {
         return Promise.reject(error.message || error);
     };

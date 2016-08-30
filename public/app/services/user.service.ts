@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../objects/user';
+import { Chat } from '../objects/chat';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -37,6 +38,26 @@ export class UserService {
         return this.http.get(userUrl)
         .toPromise()
         .then(response => response.json())
+        .catch(this.handleError);
+    }
+
+    getChats(userID): Promise<Chat[]> {
+        let chatsUrl = "/api/getchats/" + userID;
+
+        return this.http.get(chatsUrl)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+    }
+
+    createChat(user: User, selectedUser: User): Promise<any> {
+        let chatsUrl = "/api/newchat";
+        let body = JSON.stringify({"user": user, "selectedUser": selectedUser});
+        let headers = new Headers({"Content-Type": "application/json"});
+
+        return this.http.post(chatsUrl, body, {headers: headers})
+        .toPromise()
+        .then(response => response)
         .catch(this.handleError);
     }
 
