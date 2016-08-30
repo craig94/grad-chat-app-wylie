@@ -12,17 +12,24 @@ var core_1 = require("@angular/core");
 var user_1 = require("../../objects/user");
 var router_1 = require("@angular/router");
 var user_service_1 = require("../../services/user.service");
+var chat_service_1 = require("../../services/chat.service");
 var SelectedUser = (function () {
-    function SelectedUser(router, service) {
+    function SelectedUser(router, service, chatService) {
         this.router = router;
         this.service = service;
+        this.chatService = chatService;
     }
     SelectedUser.prototype.chat = function () {
         var link = ["/users", this.user._id];
         this.router.navigate(link);
     };
     SelectedUser.prototype.createChat = function () {
-        this.service.createChat(this.user, this.selectedUser).then(function (result) { return result; }).catch(function (error) { return error; });
+        var _this = this;
+        this.service.createChat(this.user, this.selectedUser).then(function (result) {
+            _this.service.getChats(_this.user._id).then(function (chats) {
+                _this.chatService.chats = chats;
+            });
+        }).catch(function (error) { return error; });
     };
     __decorate([
         core_1.Input(), 
@@ -37,7 +44,7 @@ var SelectedUser = (function () {
             selector: "user-detail",
             templateUrl: "templates/user-detail.html",
         }), 
-        __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
+        __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService, chat_service_1.ChatService])
     ], SelectedUser);
     return SelectedUser;
 }());

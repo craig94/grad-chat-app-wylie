@@ -15,6 +15,7 @@ var selectedUser_component_1 = require("../components/userDashboard/selectedUser
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var user_service_1 = require("../services/user.service");
+var chat_service_1 = require("../services/chat.service");
 var app_routing_1 = require("../router/app.routing");
 var userDashboard_component_1 = require("../components/userDashboard/userDashboard.component");
 var chat_component_1 = require("../components/chat/chat.component");
@@ -26,7 +27,7 @@ var AppModule = (function () {
         core_1.NgModule({
             bootstrap: [app_component_1.AppComponent],
             declarations: [app_component_1.AppComponent, selectedUser_component_1.SelectedUser, userDashboard_component_1.userDashboard, chat_component_1.ChatComponent, userChats_component_1.UserChats],
-            providers: [user_service_1.UserService],
+            providers: [user_service_1.UserService, chat_service_1.ChatService],
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule, app_routing_1.routing],
         }), 
         __metadata('design:paramtypes', [])

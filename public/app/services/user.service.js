@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
+var chat_service_1 = require('./chat.service');
 var UserService = (function () {
-    function UserService(http) {
+    function UserService(http, chatService) {
         this.http = http;
+        this.chatService = chatService;
         this.url = "/api/user";
         this.uriUrl = "/api/oauth/uri";
     }
@@ -63,7 +65,7 @@ var UserService = (function () {
     };
     UserService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, chat_service_1.ChatService])
     ], UserService);
     return UserService;
 }());

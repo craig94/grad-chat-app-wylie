@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { User } from "../../objects/user";
 import { Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
+import { ChatService } from "../../services/chat.service";
 
 @Component({
     selector: "user-detail",
@@ -13,7 +14,7 @@ export class SelectedUser {
     @Input()
     selectedUser: User;
 
-    constructor(private router: Router, private service: UserService) {}
+    constructor(private router: Router, private service: UserService, private chatService: ChatService) {}
 
     chat(): void {
         let link = ["/users", this.user._id];
@@ -22,7 +23,13 @@ export class SelectedUser {
 
     createChat(): void {
         this.service.createChat(this.user, this.selectedUser).then(
-            result => result
+            result => {
+                this.service.getChats(this.user._id).then(
+                    chats => {
+                        this.chatService.chats = chats;
+                    }
+                );
+            }
         ).catch(
             error => error
         );

@@ -12,10 +12,12 @@ var core_1 = require("@angular/core");
 var user_1 = require("../../objects/user");
 var user_service_1 = require("../../services/user.service");
 var router_1 = require('@angular/router');
+var chat_service_1 = require('../../services/chat.service');
 var UserChats = (function () {
-    function UserChats(service, route) {
+    function UserChats(service, route, chatService) {
         this.service = service;
         this.route = route;
+        this.chatService = chatService;
     }
     UserChats.prototype.ngOnInit = function () {
         this.getChats();
@@ -24,8 +26,8 @@ var UserChats = (function () {
     UserChats.prototype.getChats = function () {
         var _this = this;
         this.service.getChats(this.user._id).then(function (result) {
-            _this.chats = result;
-        }).catch(function (error) { return error; });
+            _this.chatService.chats = result;
+        });
     };
     UserChats.prototype.selectChat = function (chat) {
         this.selectedChat = chat;
@@ -39,7 +41,7 @@ var UserChats = (function () {
             selector: "user-chats",
             templateUrl: "templates/user-chats.html",
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [user_service_1.UserService, router_1.ActivatedRoute, chat_service_1.ChatService])
     ], UserChats);
     return UserChats;
 }());

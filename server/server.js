@@ -161,6 +161,7 @@ module.exports = function(port, db, githubAuthoriser) {
                 });
             }
         }
+        console.log(results);
         res.json(results);
     });
 

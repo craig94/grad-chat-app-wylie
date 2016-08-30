@@ -3,10 +3,11 @@ import { User } from '../objects/user';
 import { Chat } from '../objects/chat';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { ChatService } from './chat.service';
 
 @Injectable()
 export class UserService {
-    constructor (private http: Http) {}
+    constructor (private http: Http, private chatService: ChatService) {}
 
     private url = "/api/user";
     private uriUrl = "/api/oauth/uri";

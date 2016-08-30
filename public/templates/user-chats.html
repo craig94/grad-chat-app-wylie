@@ -1,7 +1,7 @@
 <section *ngIf="chatsLoaded">
     <ul class="users">
         <h2>Active Chats</h2>
-        <li *ngFor="let chat of chats" [class.selected]="chat === selectedChat" (click)="selectChat(chat)">
+        <li *ngFor="let chat of this.chatService.chats" [class.selected]="chat === selectedChat" (click)="selectChat(chat)">
             {{chat.userID}}
         </li>
     </ul>
