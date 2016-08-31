@@ -117,7 +117,7 @@ describe("server", function() {
             request(requestUrl, function(error, response) {
                 assert(dbCollections.users.insertOne.calledOnce);
                 assert.deepEqual(dbCollections.users.insertOne.firstCall.args[0], {
-                    _id: "bob",
+                    id: "bob",
                     name: "Bob Bilson",
                     avatarUrl: "http://avatar.url.com/u=test"
                 });
@@ -237,12 +237,12 @@ describe("server", function() {
                 request({url: requestUrl, jar: cookieJar}, function(error, response, body) {
                     assert.deepEqual(JSON.parse(body), [
                         {
-                            id: "bob",
+                            _id: "bob",
                             name: "Bob Bilson",
                             avatarUrl: "http://avatar.url.com/u=test"
                         },
                         {
-                            id: "charlie",
+                            _id: "charlie",
                             name: "Charlie Colinson",
                             avatarUrl: "http://avatar.url.com/u=charlie_colinson"
                         }

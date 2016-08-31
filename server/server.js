@@ -1,7 +1,7 @@
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
-var uuid = require('uuid');
+var uuid = require("uuid");
 
 module.exports = function(port, db, githubAuthoriser) {
     var app = express();
@@ -69,7 +69,6 @@ module.exports = function(port, db, githubAuthoriser) {
             res.sendStatus(401);
         }
     });
-
 
     app.get("/api/user/:id", function(req, res) {
         users.findOne({
