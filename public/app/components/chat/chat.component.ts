@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "../../objects/user";
 import { Observable } from "rxjs/Rx";
 import { UserService } from "../../services/user.service";
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from "@angular/router";
 import { Conversation } from "../../objects/conversation";
 
 @Component({

@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../services/user.service");
-var router_1 = require('@angular/router');
+var router_1 = require("@angular/router");
 var ChatComponent = (function () {
     function ChatComponent(service, route) {
         this.service = service;
