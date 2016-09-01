@@ -54,7 +54,7 @@ module.exports = function(port, db, githubAuthoriser) {
         socket.on("message", data => {
             var chatID = data.chatID;
             if (convos[chatID]) {
-                chat.to(chatID).emit("message", data.text);
+                chat.to(chatID).emit("message", {text: data.text, senderID: user});
             }
         });
 
