@@ -11,10 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../services/user.service");
 var router_1 = require("@angular/router");
+var messaging_service_1 = require("../../services/messaging.service");
 var ChatComponent = (function () {
-    function ChatComponent(service, route) {
+    function ChatComponent(service, route, messaging) {
         this.service = service;
         this.route = route;
+        this.messaging = messaging;
+        this.messages = [];
     }
     ChatComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -23,6 +26,9 @@ var ChatComponent = (function () {
             _this.chatID = params["chatID"];
         });
         this.getChatDetails(this.chatID);
+        this.messaging.getMsgs().subscribe(function (msg) {
+            _this.messages.push(msg);
+        });
     };
     ChatComponent.prototype.getUser = function () {
         var _this = this;
@@ -32,12 +38,15 @@ var ChatComponent = (function () {
         var _this = this;
         this.service.getChatDetails(id).then(function (result) { return _this.convo = result; });
     };
+    ChatComponent.prototype.sendMessage = function (msg) {
+        this.messaging.sendMsg(msg);
+    };
     ChatComponent = __decorate([
         core_1.Component({
             selector: "user-chat",
             templateUrl: "templates/user-chat.html",
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [user_service_1.UserService, router_1.ActivatedRoute, messaging_service_1.MessagingService])
     ], ChatComponent);
     return ChatComponent;
 }());

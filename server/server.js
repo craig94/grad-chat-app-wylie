@@ -2,6 +2,7 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var uuid = require("uuid");
+var io = require("socket.io");
 
 module.exports = function(port, db, githubAuthoriser) {
     var app = express();
@@ -21,6 +22,17 @@ module.exports = function(port, db, githubAuthoriser) {
     var sessions = {};
 
     var convos = {};
+
+    //websocket stuff
+    var server = require("http").createServer(app);
+    var ws = io(server);
+
+    ws.on("connection", function(socket) {
+        console.log("user connected");
+        socket.on("message", function(data) {
+            console.log("k");
+        });
+    });
 
     app.get("/oauth", function(req, res) {
         githubAuthoriser.authorise(req, function(githubUser, token) {
@@ -169,5 +181,5 @@ module.exports = function(port, db, githubAuthoriser) {
         res.json(results);
     });
 
-    return app.listen(port);
+    return server.listen(port);
 };

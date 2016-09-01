@@ -20,6 +20,7 @@ var app_routing_1 = require("../router/app.routing");
 var userDashboard_component_1 = require("../components/userDashboard/userDashboard.component");
 var chat_component_1 = require("../components/chat/chat.component");
 var userChats_component_1 = require("../components/userChats/userChats.component");
+var messaging_service_1 = require("../services/messaging.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,7 +28,7 @@ var AppModule = (function () {
         core_1.NgModule({
             bootstrap: [app_component_1.AppComponent],
             declarations: [app_component_1.AppComponent, selectedUser_component_1.SelectedUser, userDashboard_component_1.userDashboard, chat_component_1.ChatComponent, userChats_component_1.UserChats],
-            providers: [user_service_1.UserService, chat_service_1.ChatService],
+            providers: [user_service_1.UserService, chat_service_1.ChatService, messaging_service_1.MessagingService],
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule, app_routing_1.routing],
         }), 
         __metadata('design:paramtypes', [])

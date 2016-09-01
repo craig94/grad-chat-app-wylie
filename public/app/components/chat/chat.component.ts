@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { UserService } from "../../services/user.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Conversation } from "../../objects/conversation";
+import { MessagingService } from "../../services/messaging.service";
 
 @Component({
     selector: "user-chat",
@@ -14,8 +15,11 @@ export class ChatComponent implements OnInit {
     user: User;
     chatID: string;
     convo: Conversation;
+    private connection;
+    message;
+    messages = [];
 
-    constructor(private service: UserService, private route: ActivatedRoute) {}
+    constructor(private service: UserService, private route: ActivatedRoute, private messaging: MessagingService) {}
 
     ngOnInit(): void {
         this.getUser();
@@ -23,6 +27,10 @@ export class ChatComponent implements OnInit {
             this.chatID = params["chatID"];
         });
         this.getChatDetails(this.chatID);
+
+        this.messaging.getMsgs().subscribe(msg => {
+            this.messages.push(msg)
+        });
     }
 
     getUser(): void {
@@ -35,5 +43,9 @@ export class ChatComponent implements OnInit {
         this.service.getChatDetails(id).then(
             result => this.convo = result
         );
+    }
+
+    sendMessage(msg: string): void {
+        this.messaging.sendMsg(msg);
     }
 }

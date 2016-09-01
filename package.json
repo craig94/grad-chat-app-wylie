@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/joebandenburg/chat-grad-project",
   "devDependencies": {
+    "angular2-websocket": "^0.7.0",
     "chai": "^3.0.0",
     "core-js": "^2.4.0",
     "grunt": "^0.4.5",
@@ -38,7 +39,8 @@
     "mocha": "^2.2.5",
     "mongodb": "^2.2.8",
     "mongojs": "^2.4.0",
-    "uuid": "^2.0.2"
+    "uuid": "^2.0.2",
+    "websocket": "^1.0.23"
   },
   "dependencies": {
     "URIjs": "^1.15.1",
@@ -68,6 +70,8 @@
     "typescript": "^1.8.10",
     "body-parser": "^1.15.2",
     "lite-server": "^2.2.0",
-    "reflect-metadata": "0.1.3"
+    "reflect-metadata": "0.1.3",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8"
   }
 }
