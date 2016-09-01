@@ -1,3 +1,11 @@
-<div *ngIf="convo">
+<div class="msgSend" *ngIf="convo">
     <h2>Chat with {{convo.user2.name}}</h2>
+    <div class="msgBox">
+        <ul>
+            <li *ngFor="let message of messages">
+                {{message}}
+            </li>
+        </ul>
+    </div>
+    <input [(ngModel)]="message" (keyup.enter)="sendMessage(); message=''" /><button (click)="sendMessage(); message=''">Send</button>
 </div>

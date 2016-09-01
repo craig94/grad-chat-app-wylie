@@ -12,14 +12,15 @@ export class MessagingService {
     private url = "http://localhost:8080";
     private socket;
 
-    sendMsg(msg: string): void {
-        this.socket.emit("message", msg);
+    sendMsg(msg: string, chatID: string): void {
+        this.socket.emit("message", {text: msg, chatID: chatID});
     }
 
-    getMsgs() {
+    getMsgs(chatID: string) {
         let observable = new Observable(observer => {
-            this.socket = io(this.url);
-            this.socket.on('message', (data) => {
+            this.socket = io(this.url + "/chat");
+            this.joinChat(chatID);
+            this.socket.on("message", (data) => {
                 observer.next(data);
             });
             return () => {
@@ -27,5 +28,9 @@ export class MessagingService {
             };
         })
         return observable;
+    }
+
+    joinChat(chatID: string): void {
+        this.socket.emit("join", chatID);
     }
 }

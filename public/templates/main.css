@@ -80,3 +80,35 @@ nav a:hover {
 nav a.active {
     color: #039be5;
 }
+
+.msgBox {
+    border: none;
+    padding: 5px;
+    font: 24px/36px sans-serif;
+    width: 1000pt;
+    height: 300pt;
+    overflow: scroll;
+}
+
+.msgSend {
+    margin-left: 100pt;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid yellowgreen;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: yellowgreen;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #88ba1c;
+}

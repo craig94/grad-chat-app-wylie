@@ -26,7 +26,7 @@ var ChatComponent = (function () {
             _this.chatID = params["chatID"];
         });
         this.getChatDetails(this.chatID);
-        this.messaging.getMsgs().subscribe(function (msg) {
+        this.messaging.getMsgs(this.chatID).subscribe(function (msg) {
             _this.messages.push(msg);
         });
     };
@@ -38,8 +38,8 @@ var ChatComponent = (function () {
         var _this = this;
         this.service.getChatDetails(id).then(function (result) { return _this.convo = result; });
     };
-    ChatComponent.prototype.sendMessage = function (msg) {
-        this.messaging.sendMsg(msg);
+    ChatComponent.prototype.sendMessage = function () {
+        this.messaging.sendMsg(this.message, this.chatID);
     };
     ChatComponent = __decorate([
         core_1.Component({

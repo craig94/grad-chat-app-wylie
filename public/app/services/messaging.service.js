@@ -16,14 +16,15 @@ var MessagingService = (function () {
     function MessagingService() {
         this.url = "http://localhost:8080";
     }
-    MessagingService.prototype.sendMsg = function (msg) {
-        this.socket.emit("message", msg);
+    MessagingService.prototype.sendMsg = function (msg, chatID) {
+        this.socket.emit("message", { text: msg, chatID: chatID });
     };
-    MessagingService.prototype.getMsgs = function () {
+    MessagingService.prototype.getMsgs = function (chatID) {
         var _this = this;
         var observable = new Rx_1.Observable(function (observer) {
-            _this.socket = io(_this.url);
-            _this.socket.on('message', function (data) {
+            _this.socket = io(_this.url + "/chat");
+            _this.joinChat(chatID);
+            _this.socket.on("message", function (data) {
                 observer.next(data);
             });
             return function () {
@@ -31,6 +32,9 @@ var MessagingService = (function () {
             };
         });
         return observable;
+    };
+    MessagingService.prototype.joinChat = function (chatID) {
+        this.socket.emit("join", chatID);
     };
     MessagingService = __decorate([
         core_1.Injectable(), 

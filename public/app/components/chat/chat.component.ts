@@ -28,8 +28,8 @@ export class ChatComponent implements OnInit {
         });
         this.getChatDetails(this.chatID);
 
-        this.messaging.getMsgs().subscribe(msg => {
-            this.messages.push(msg)
+        this.messaging.getMsgs(this.chatID).subscribe(msg => {
+            this.messages.push(msg);
         });
     }
 
@@ -45,7 +45,7 @@ export class ChatComponent implements OnInit {
         );
     }
 
-    sendMessage(msg: string): void {
-        this.messaging.sendMsg(msg);
+    sendMessage(): void {
+        this.messaging.sendMsg(this.message, this.chatID);
     }
 }

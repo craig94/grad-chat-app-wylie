@@ -27,10 +27,39 @@ module.exports = function(port, db, githubAuthoriser) {
     var server = require("http").createServer(app);
     var ws = io(server);
 
-    ws.on("connection", function(socket) {
-        console.log("user connected");
-        socket.on("message", function(data) {
-            console.log("k");
+    //namespace: /chat
+    var chat = ws.of("/chat");
+    chat.on("connection", function(socket) {
+
+        // get username
+        var getSessionToken = function(socket) {
+            var cookie = socket.request.headers.cookie.split(";");
+            for (var i=0;i<cookie.length;i++) {
+                var innerParts = cookie[i].trim().split("=");
+                if (innerParts[0] === "sessionToken") {
+                    return innerParts[1];
+                }
+            }
+        }
+        var sessionToken = getSessionToken(socket);
+        var user = sessions[sessionToken].user;
+
+        socket.on("join", chatID => {
+            if (convos[chatID]) {
+                socket.join(chatID);
+                console.log(user + " connected to chat " + chatID);
+            }
+        });
+
+        socket.on("message", data => {
+            var chatID = data.chatID;
+            if (convos[chatID]) {
+                chat.to(chatID).emit("message", data.text);
+            }
+        });
+
+        socket.on("disconnect", function() {
+            console.log(user + " disconnected from chat");
         });
     });
 
