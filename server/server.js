@@ -60,8 +60,9 @@ module.exports = function(port, db, githubAuthoriser) {
         socket.on("message", data => {
             var chatID = data.chatID;
             if (convos[chatID]) {
-                convos[chatID].messages.push({text: data.text, senderID: user});// store on server
-                chat.to(chatID).emit("message", {text: data.text, senderID: user});// send to clients
+                var message = {text: data.text, senderID: user};
+                convos[chatID].messages.push(message);// store on server
+                chat.to(chatID).emit("message", message);// send to clients
             }
         });
 
