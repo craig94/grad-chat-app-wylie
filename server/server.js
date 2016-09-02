@@ -52,7 +52,7 @@ module.exports = function(port, db, githubAuthoriser) {
                 // send previous chat messages to new joiner
                 var messages = convos[chatID].messages;
                 for (var i=0;i<messages.length;i++) {
-                    socket.emit("message", {text: messages[i].text, senderID: messages[i].senderID});
+                    socket.emit("message", {text: messages[i].text, senderID: messages[i].senderID, timestamp: messages[i].timestamp});
                 }
             }
         });
@@ -60,7 +60,7 @@ module.exports = function(port, db, githubAuthoriser) {
         socket.on("message", data => {
             var chatID = data.chatID;
             if (convos[chatID]) {
-                var message = {text: data.text, senderID: user};
+                var message = {text: data.text, senderID: user, timestamp: new Date()};
                 convos[chatID].messages.push(message);// store on server
                 chat.to(chatID).emit("message", message);// send to clients
             }
