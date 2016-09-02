@@ -48,13 +48,20 @@ module.exports = function(port, db, githubAuthoriser) {
             if (convos[chatID]) {
                 socket.join(chatID);
                 console.log(user + " connected to chat " + chatID);
+
+                // send previous chat messages to new joiner
+                var messages = convos[chatID].messages;
+                for (var i=0;i<messages.length;i++) {
+                    socket.emit("message", {text: messages[i].text, senderID: messages[i].senderID});
+                }
             }
         });
 
         socket.on("message", data => {
             var chatID = data.chatID;
             if (convos[chatID]) {
-                chat.to(chatID).emit("message", {text: data.text, senderID: user});
+                convos[chatID].messages.push({text: data.text, senderID: user});// store on server
+                chat.to(chatID).emit("message", {text: data.text, senderID: user});// send to clients
             }
         });
 
@@ -159,7 +166,7 @@ module.exports = function(port, db, githubAuthoriser) {
         var newChat = {
             "user1": user,
             "user2": selectedUser,
-            "messages": {}
+            "messages": []
         };
 
         convos[chatID] = newChat;
