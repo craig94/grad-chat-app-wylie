@@ -34,7 +34,7 @@ module.exports = function(port, db, githubAuthoriser) {
         // get username
         var getSessionToken = function(socket) {
             var cookie = socket.request.headers.cookie.split(";");
-            for (var i=0;i<cookie.length;i++) {
+            for (var i = 0;i < cookie.length; i++) {
                 var innerParts = cookie[i].trim().split("=");
                 if (innerParts[0] === "sessionToken") {
                     return innerParts[1];
@@ -44,23 +44,27 @@ module.exports = function(port, db, githubAuthoriser) {
         var sessionToken = getSessionToken(socket);
         var user = sessions[sessionToken].user;
 
-        socket.on("join", chatID => {
+        socket.on("join", function(chatID) {
             if (convos[chatID]) {
                 socket.join(chatID);
                 console.log(user + " connected to chat " + chatID);
 
                 // send previous chat messages to new joiner
                 var messages = convos[chatID].messages;
-                for (var i=0;i<messages.length;i++) {
-                    socket.emit("message", {text: messages[i].text, senderID: messages[i].senderID, timestamp: messages[i].timestamp});
+                for (var i = 0;i < messages.length; i++) {
+                    socket.emit("message", messages[i]);
                 }
             }
         });
 
-        socket.on("message", data => {
+        socket.on("message", function(data) {
             var chatID = data.chatID;
             if (convos[chatID]) {
-                var message = {text: data.text, senderID: user, timestamp: new Date()};
+                var message = {
+                    text: data.text,
+                    senderID: user,
+                    timestamp: new Date()
+                };
                 convos[chatID].messages.push(message);// store on server
                 chat.to(chatID).emit("message", message);// send to clients
             }
